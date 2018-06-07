@@ -75,9 +75,12 @@ class DbView extends \Illuminate\View\View implements ArrayAccess, Renderable
         // done rendering all views so that there is nothing left hanging over when
         // anothoer view is rendered in the future by the application developers.
         // Before flushing, check Laravel version for correct method use
-        if ( version_compare(app()->version(), '5.4.0') >= 0 ) 
+        //if ( version_compare(app()->version(), '5.4.0') >= 0 )
+        // Lumin reports version "Lumen (5.4.7) (Laravel Components 5.4.*)"
+        // Version check does not work with Lumen so check the method exists
+        if ( method_exists('\Illuminate\View\Factory', 'flushStateIfDoneRendering') )
             View::flushStateIfDoneRendering();
-        else 
+        else
             View::flushSectionsIfDoneRendering();
 
         return $response ?: $contents;

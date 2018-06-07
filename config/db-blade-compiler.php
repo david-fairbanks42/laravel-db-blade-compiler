@@ -15,5 +15,7 @@ return array(
 	 */
 	'model_default_field' => 'content',
 
-    'cache' => false
+    'cache' => false,
+
+    'storage_path' => storage_path('app/db-blade-compiler/views')
 );
